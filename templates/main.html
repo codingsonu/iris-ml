@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Iris Predictor</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        padding: 40px;
+        text-align: center;
+      }
+
+      form {
+        background: #ffffff;
+        display: inline-block;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+
+      input[type="text"] {
+        padding: 8px;
+        width: 200px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-top: 5px;
+      }
+
+      input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        margin-top: 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      h2 {
+        color: #333;
+      }
+
+      h3 {
+        margin-top: 20px;
+        color: #333;
+      }
+    </style>
+
+    <script>
+      function validateForm() {
+        const pl = document.forms["irisForm"]["pl"].value;
+        const pw = document.forms["irisForm"]["pw"].value;
+
+        if (isNaN(pl) || isNaN(pw)) {
+          alert("Please enter valid numbers for petal length and width.");
+          return false;
+        }
+        return true;
+      }
+    </script>
+  </head>
+
+  <body>
+    <h2>Predict Iris Flower</h2>
+
+    <form
+      name="irisForm"
+      method="post"
+      action="/predict"
+      onsubmit="return validateForm()"
+    >
+      <label>Petal Length:</label><br />
+      <input type="text" name="pl" required /><br /><br />
+
+      <label>Petal Width:</label><br />
+      <input type="text" name="pw" required /><br /><br />
+
+      <input type="submit" value="Predict" />
+    </form>
+
+    {% if result %}
+    <h3>{{ result }}</h3>
+    {% endif %}
+  </body>
+</html>
